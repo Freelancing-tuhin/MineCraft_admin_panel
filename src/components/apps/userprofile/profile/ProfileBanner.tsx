@@ -18,14 +18,6 @@ const ProfileBanner = () => {
                   <h4 className="text-xl">⭐3.0</h4>
                   <p className="text-darklink dark:text-bodytext text-sm">Ratings</p>
                 </div>
-                <div className="text-center">
-                  {user?.is_verified ? (
-                    <h4 className="text-xl">✅verified</h4>
-                  ) : (
-                    <h4 className="text-xl">not verified</h4>
-                  )}
-                  <p className="text-darklink dark:text-bodytext text-sm">Account</p>
-                </div>
               </div>
             </div>
             <div className="lg:col-span-4 col-span-12 lg:order-2 order-1">
@@ -42,8 +34,13 @@ const ProfileBanner = () => {
               </div>
             </div>
             <div className="lg:col-span-4 col-span-12 lg:order-3 order-3">
-              <div className="flex items-center gap-3.5 lg:justify-end justify-center h-full xl:pe-4">
-                <Button color={'primary'}>Edit Profile</Button>
+              <div className="text-center">
+                {user?.is_verified ? (
+                  <h4 className="text-xl">✅verified</h4>
+                ) : (
+                  <h4 className="text-xl">not verified</h4>
+                )}
+                <p className="text-darklink dark:text-bodytext text-sm">Account</p>
               </div>
             </div>
           </div>

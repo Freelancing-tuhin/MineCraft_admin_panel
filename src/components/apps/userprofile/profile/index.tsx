@@ -4,11 +4,13 @@ import ProfileBanner from './ProfileBanner';
 import DocumentUploader from './Documents';
 import BankDetails from './BankDetails';
 import FirmDetails from './FirmDetails';
+import { ToastContainer } from 'react-toastify';
 
 const UserProfileApp = () => {
   return (
     <>
       <UserDataProvider>
+        <ToastContainer />
         <div className="grid grid-cols-12 gap-[30px]">
           {/* Banner */}
           <div className="col-span-12">

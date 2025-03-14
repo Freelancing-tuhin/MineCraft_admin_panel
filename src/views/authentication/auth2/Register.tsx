@@ -17,7 +17,8 @@ const Register = () => {
     phone: '',
     address: '',
     age: '',
-    profile_pic: 'https://avatar.iran.liara.run/public/boy?username=Ash',
+    profile_pic:
+      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQkAJEkJQ1WumU0hXNpXdgBt9NUKc0QDVIiaw&s',
   });
 
   const [loading, setLoading] = useState(false);
