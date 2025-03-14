@@ -28,7 +28,7 @@ const DocumentUploadStepper = () => {
   const { login, user } = useContext<any>(AuthContext);
   const [currentStep, setCurrentStep] = useState(0);
   const [files, setFiles] = useState<any>({});
-  const [uploadCompleted, setUploadCompleted] = useState(false);
+  const [, setUploadCompleted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string>('');
 
@@ -108,7 +108,7 @@ const DocumentUploadStepper = () => {
         <>
           {/* Stepper */}
           <div className="flex items-center justify-between mb-6">
-            {stepLabels.map((label, index) => (
+            {stepLabels.map((index: any): any => (
               <div key={index} className="flex items-center">
                 {/* Step Circle */}
                 <div
