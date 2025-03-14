@@ -5,6 +5,7 @@ import { updateOrganizerProfile } from 'src/service/auth';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import Loader from 'src/components/shared/Loader';
+import { API_BASE_URL } from 'src/config';
 
 const FirmDetails = () => {
   const { user, login } = useContext<any>(AuthContext);
@@ -16,7 +17,7 @@ const FirmDetails = () => {
   useEffect(() => {
     const fetchServices = async () => {
       try {
-        const response = await axios.get('http://localhost:8989/api/v1/services/get-all');
+        const response = await axios.get(`${API_BASE_URL}/api/v1/services/get-all`);
         setServices(response.data.result);
       } catch (error) {
         console.error('Error fetching services:', error);

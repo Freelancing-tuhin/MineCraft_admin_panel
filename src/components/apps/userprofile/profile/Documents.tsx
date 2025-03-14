@@ -28,7 +28,6 @@ const DocumentUploadStepper = () => {
   const { login, user } = useContext<any>(AuthContext);
   const [currentStep, setCurrentStep] = useState(0);
   const [files, setFiles] = useState<any>({});
-  const [, setUploadCompleted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string>('');
 
@@ -85,7 +84,6 @@ const DocumentUploadStepper = () => {
       const organizerId = user?._id;
       const response = await uploadOrganizerDocuments(organizerId, files);
       login(response?.result);
-      setUploadCompleted(true);
       notify();
     } catch (error) {
       console.error('Upload Failed', error);
@@ -108,9 +106,10 @@ const DocumentUploadStepper = () => {
         <>
           {/* Stepper */}
           <div className="flex items-center justify-between mb-6">
-            {stepLabels.map((index: any): any => (
+            {stepLabels.map((label, index) => (
               <div key={index} className="flex items-center">
                 {/* Step Circle */}
+                <div className="hidden">{label}</div>
                 <div
                   className={`w-5 h-5 flex items-center justify-center rounded-full text-xs font-bold 
                 ${index === currentStep ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-700'}
