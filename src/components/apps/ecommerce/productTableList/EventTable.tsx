@@ -59,7 +59,9 @@ const EventTable = ({ events, totalPages, getEvents, searchText }: any) => {
                   <div className="flex gap-3 items-center">
                     <img src={item.banner_Image} alt="Event Banner" className="h-14 w-14 rounded" />
                     <div>
-                      <h6 className="text-base">{item.title}</h6>
+                      <h6 className="text-base overflow-hidden whitespace-nowrap text-ellipsis max-w-[20ch]">
+                        {item.title}
+                      </h6>
                       <p className="text-sm text-darklink dark:text-bodytext">{item.category}</p>
                     </div>
                   </div>

@@ -16,7 +16,7 @@ const Pricing = ({ eventData, setEventData }: any) => {
   const addTicket = () => {
     setEventData({
       ...eventData,
-      tickets: [...eventData.tickets, { ticketName: '', ticketPrice: '' }],
+      tickets: [...eventData.tickets, { ticketName: '', ticketPrice: '', quantity: '' }],
     });
   };
 
@@ -99,6 +99,17 @@ const Pricing = ({ eventData, setEventData }: any) => {
                 name="ticketPrice"
                 value={ticket.ticketPrice}
                 onChange={(e) => handleInputChange(index, 'ticketPrice', e.target.value)}
+                placeholder="Enter ticket price"
+              />
+              <div className="mb-2 block mt-3">
+                <Label htmlFor={`ticketPrice-${index}`} value="Ticket Quantity" />
+              </div>
+              <TextInput
+                id={`quantity-${index}`}
+                type="number"
+                name="quantity"
+                value={ticket.quantity}
+                onChange={(e) => handleInputChange(index, 'quantity', e.target.value)}
                 placeholder="Enter ticket price"
               />
               <Button color="red" className="mt-3" onClick={() => removeTicket(index)}>
