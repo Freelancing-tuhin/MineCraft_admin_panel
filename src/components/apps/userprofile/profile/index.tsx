@@ -23,7 +23,7 @@ const UserProfileApp = () => {
                 <Introduction />
               </div>
               <div className="col-span-12">
-                <DocumentUploader />
+                <FirmDetails />
               </div>
               {/* Photos */}
             </div>
@@ -31,9 +31,6 @@ const UserProfileApp = () => {
           <div className="lg:col-span-8 col-span-12">
             <div className="col-span-12">
               <BankDetails />
-            </div>
-            <div className="col-span-12 mt-8">
-              <FirmDetails />
             </div>
           </div>
         </div>

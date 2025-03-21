@@ -81,19 +81,6 @@ const FirmDetails = () => {
               ))}
             </select>
           </div>
-          <div className="form-group mt-2">
-            <label className="block text-sm font-medium card-subtitle">Type of Firm</label>
-            <select
-              value={typeOfFirm}
-              onChange={(e) => setTypeOfFirm(e.target.value)}
-              className="mt-1 block w-full p-2 border border-gray-300 dark:bg-gray-700 dark:border-none rounded-md shadow-sm"
-            >
-              <option value="">Select firm type</option>
-              <option value="Sole Proprietorship">Sole Proprietorship</option>
-              <option value="Partnership">Partnership</option>
-              <option value="Private Limited">Private Limited</option>
-            </select>
-          </div>
           <button
             onClick={handleUpdate}
             className="w-2/4 bg-blue-600 text-white py-2 mt-4 rounded-md hover:bg-blue-700 transition"
