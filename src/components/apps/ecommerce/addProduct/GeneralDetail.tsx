@@ -4,10 +4,16 @@ import CardBox from 'src/components/shared/CardBox';
 interface GeneralDetailProps {
   title: string;
   description: string;
+  locationDescription: string;
   handleChange: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
 }
 
-const GeneralDetail: React.FC<GeneralDetailProps> = ({ title, description, handleChange }) => {
+const GeneralDetail: React.FC<GeneralDetailProps> = ({
+  title,
+  description,
+  locationDescription,
+  handleChange,
+}) => {
   return (
     <CardBox>
       <h5 className="card-title mb-4">General</h5>
@@ -51,6 +57,19 @@ const GeneralDetail: React.FC<GeneralDetailProps> = ({ title, description, handl
           Set a description for better visibility.
         </small>
       </div>
+
+      <div className="mb-2 block">
+        <Label htmlFor="locationDescription" value="Location Description" />
+      </div>
+      <TextInput
+        id="locationDescription"
+        name="locationDescription"
+        type="text"
+        value={locationDescription}
+        onChange={handleChange}
+        className="form-control"
+        placeholder="Location Details"
+      />
     </CardBox>
   );
 };

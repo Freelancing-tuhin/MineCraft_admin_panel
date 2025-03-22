@@ -11,6 +11,7 @@ import { createEvent, CreateEventPayload } from 'src/service/createEvent';
 import { useNavigate } from 'react-router';
 import { AuthContext } from 'src/context/authContext/AuthContext';
 import LockScreen from 'src/views/authentication/lockScreen/LockScreen';
+import AdditionalDetails from 'src/components/apps/ecommerce/addProduct/AdditionalDetails';
 
 const BCrumb = [
   {
@@ -37,11 +38,13 @@ const AddProduct = () => {
       longitude: 0,
     },
     description: '',
-    isTicketed: false,
     // ticketName: '',
     // ticketPrice: 0,
     tickets: [],
     organizerId: user?._id,
+    amenities: '',
+    locationDescription: '',
+    eventRules: '',
   });
   const navigate = useNavigate();
   const [banner, setBanner] = useState<string | null>(null);
@@ -65,12 +68,12 @@ const AddProduct = () => {
 
     const eventPayload: CreateEventPayload = {
       ...eventData,
-      bannerImage: bannerFile, // Ensure actual file is sent
+      bannerImage: bannerFile,
     };
 
     console.log('Submitting event:', eventPayload);
     await createEvent(eventPayload);
-    navigate('/Event/list');
+    // navigate('/Event/list');
   };
 
   return (
@@ -85,6 +88,7 @@ const AddProduct = () => {
               title={eventData.title}
               description={eventData.description}
               handleChange={handleChange}
+              locationDescription={eventData.locationDescription}
             />
             <Variation eventData={eventData} setEventData={setEventData} />
             <Pricing eventData={eventData} setEventData={setEventData} />
@@ -95,6 +99,17 @@ const AddProduct = () => {
             <Thumbnail onBannerChange={handleBannerChange} setBanner={setBanner} banner={banner} />
             <Status eventData={eventData} setEventData={setEventData} />
             <ProductData eventData={eventData} setEventData={setEventData} />
+            <AdditionalDetails
+              amenities={eventData.amenities}
+              eventRules={eventData.eventRules}
+              handleChange={handleChange}
+              handleAmenitiesChange={(selectedAmenities) =>
+                setEventData((prevData) => ({
+                  ...prevData,
+                  amenities: selectedAmenities.join(', '), // Convert array to comma-separated string
+                }))
+              }
+            />
           </div>
         </div>
         <div className="lg:col-span-8 col-span-12">

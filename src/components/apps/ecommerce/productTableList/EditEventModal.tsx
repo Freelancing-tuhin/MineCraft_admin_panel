@@ -162,16 +162,7 @@ const EditEventModal = ({ open, onClose, eventData, getEvents }: any) => {
 
         {step === 3 && (
           <div className="grid grid-cols-2 gap-6">
-            <div className="flex items-center space-x-2 col-span-2">
-              <Checkbox
-                id="isTicketed"
-                name="isTicketed"
-                checked={editedEvent?.isTicketed || false}
-                onChange={handleChange}
-              />
-              <Label htmlFor="isTicketed" value="Is Ticketed" />
-            </div>
-            {editedEvent?.isTicketed && (
+            {true && (
               <>
                 {editedEvent.tickets.map((ticket: any, index: number) => (
                   <div key={index} className="relative border p-4 rounded-lg shadow-sm bg-white">
@@ -191,7 +182,7 @@ const EditEventModal = ({ open, onClose, eventData, getEvents }: any) => {
                     <div className="mb-2">
                       <Label
                         htmlFor={`ticketName-${index}`}
-                        value={`Ticket ${index + 1}`}
+                        value={`Stall Name`}
                         className="font-semibold"
                       />
                     </div>
@@ -201,7 +192,7 @@ const EditEventModal = ({ open, onClose, eventData, getEvents }: any) => {
                       name="ticketName"
                       value={ticket.ticketName}
                       onChange={(e) => handleInputChange(index, 'ticketName', e.target.value)}
-                      placeholder="Enter ticket name"
+                      placeholder="Enter stall name"
                       className="w-full"
                     />
 
@@ -209,7 +200,7 @@ const EditEventModal = ({ open, onClose, eventData, getEvents }: any) => {
                     <div className="mt-3">
                       <Label
                         htmlFor={`ticketPrice-${index}`}
-                        value="Ticket Price"
+                        value="Stall Price"
                         className="font-medium"
                       />
                       <TextInput
@@ -218,14 +209,14 @@ const EditEventModal = ({ open, onClose, eventData, getEvents }: any) => {
                         name="ticketPrice"
                         value={ticket.ticketPrice}
                         onChange={(e) => handleInputChange(index, 'ticketPrice', e.target.value)}
-                        placeholder="Enter ticket price"
+                        placeholder="Enter stall price"
                         className="w-full"
                       />
                     </div>
                   </div>
                 ))}
                 <Button color="primary" className="mt-3 h-10 w-32" onClick={addTicket}>
-                  Add Ticket
+                  Add Stall
                 </Button>
               </>
             )}

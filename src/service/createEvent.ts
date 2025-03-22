@@ -15,7 +15,6 @@ export interface CreateEventPayload {
   };
   description: string;
   bannerImage: File;
-  isTicketed: boolean;
   tickets?: any;
   organizerId: string;
 }
@@ -36,12 +35,12 @@ export const createEvent = async (eventData: CreateEventPayload): Promise<void> 
     formData.append('location[longitude]', String(eventData.location.longitude));
 
     formData.append('description', eventData.description);
+    formData.append('amenities', eventData.description);
+    formData.append('locationDescription', eventData.description);
+    formData.append('eventRules', eventData.description);
     formData.append('banner_Image', eventData.bannerImage);
-    formData.append('isTicketed', String(eventData.isTicketed));
 
-    if (eventData.isTicketed && eventData.tickets) {
-      formData.append('tickets', JSON.stringify(eventData.tickets));
-    }
+    formData.append('tickets', JSON.stringify(eventData.tickets));
 
     formData.append('organizerId', eventData.organizerId);
 

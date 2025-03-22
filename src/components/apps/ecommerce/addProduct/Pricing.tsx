@@ -1,13 +1,11 @@
 import { Label, Radio, TextInput, Button } from 'flowbite-react';
 import CardBox from 'src/components/shared/CardBox';
-// import { Plus, Minus } from 'tabler-icons-react';
+import { useEffect, useState } from 'react';
 
 const Pricing = ({ eventData, setEventData }: any) => {
-  const handleRadioChange = (event: any) => {
-    setEventData({ ...eventData, isTicketed: event.target.value === 'ticketed', tickets: [] });
-  };
+  const [stallType, setStallType] = useState<'single' | 'multiple'>('single');
 
-  const handleInputChange = (index: any, field: any, value: any) => {
+  const handleInputChange = (index: number, field: string, value: any) => {
     const updatedTickets = [...eventData.tickets];
     updatedTickets[index][field] = value;
     setEventData({ ...eventData, tickets: updatedTickets });
@@ -16,82 +14,70 @@ const Pricing = ({ eventData, setEventData }: any) => {
   const addTicket = () => {
     setEventData({
       ...eventData,
-      tickets: [...eventData.tickets, { ticketName: '', ticketPrice: '', quantity: '' }],
+      tickets: [...eventData.tickets, { ticketName: '', ticketPrice: '', quantity: '', area: '' }],
     });
   };
 
-  const removeTicket = (index: any) => {
-    const updatedTickets = eventData.tickets.filter((_: any, i: any) => i !== index);
-    setEventData({ ...eventData, tickets: updatedTickets });
-  };
+  useEffect(() => {
+    setEventData({
+      ...eventData,
+      tickets: [...eventData.tickets, { ticketName: '', ticketPrice: '', quantity: '', area: '' }],
+    });
+  }, []);
 
   return (
     <CardBox>
-      <h5 className="card-title mb-4">Pricing</h5>
-      <div className="mb-4">
-        <div className="mb-2 block">
-          <Label htmlFor="isTicketed" value="Activity Type" />
-        </div>
-        <div className="grid grid-cols-12 gap-6">
-          <div className="lg:col-span-6 col-span-12">
-            <div className="border border-ld p-4 rounded-xl hover:border-primary hover:bg-lightprimary cursor-pointer">
-              <div className="flex items-center gap-4 sm:ps-2">
-                <Radio
-                  id="free-activity"
-                  name="isTicketed"
-                  value="free"
-                  className="cursor-pointer"
-                  checked={!eventData.isTicketed}
-                  onChange={handleRadioChange}
-                />
-                <Label
-                  htmlFor="free-activity"
-                  className="cursor-pointer text-ld font-semibold text-base"
-                >
-                  Free Activity
-                </Label>
-              </div>
-            </div>
-          </div>
-          <div className="lg:col-span-6 col-span-12">
-            <div className="border border-ld p-4 rounded-xl hover:border-primary hover:bg-lightprimary cursor-pointer">
-              <div className="flex items-center gap-4 sm:ps-2">
-                <Radio
-                  id="ticketed-activity"
-                  name="isTicketed"
-                  value="ticketed"
-                  className="cursor-pointer"
-                  checked={eventData.isTicketed}
-                  onChange={handleRadioChange}
-                />
-                <Label
-                  htmlFor="ticketed-activity"
-                  className="cursor-pointer text-ld font-semibold text-base"
-                >
-                  Ticketed Activity
-                </Label>
-              </div>
-            </div>
-          </div>
-        </div>
+      <h5 className="card-title mb-4">Add Stalls</h5>
+
+      <div className="flex gap-4 mb-4">
+        <label className="flex items-center gap-2">
+          <Radio
+            name="stallType"
+            value="single"
+            checked={stallType === 'single'}
+            onChange={() => {
+              setStallType('single');
+            }}
+          />
+          Single Land
+        </label>
+        <label className="flex items-center gap-2">
+          <Radio
+            name="stallType"
+            value="multiple"
+            checked={stallType === 'multiple'}
+            onChange={() => setStallType('multiple')}
+          />
+          Multiple Stalls
+        </label>
       </div>
-      {eventData.isTicketed && (
-        <>
-          {eventData.tickets.map((ticket: any, index: any) => (
-            <div key={index} className="mb-4 border p-4 rounded-lg">
-              <div className="mb-2 block">
-                <Label htmlFor={`ticketName-${index}`} value={`Ticket Name ${index + 1}`} />
-              </div>
-              <TextInput
-                id={`ticketName-${index}`}
-                type="text"
-                name="ticketName"
-                value={ticket.ticketName}
-                onChange={(e) => handleInputChange(index, 'ticketName', e.target.value)}
-                placeholder="Enter ticket name"
-              />
+
+      <div className="grid grid-cols-2 gap-4">
+        {eventData.tickets
+          .slice(0, stallType === 'single' ? 1 : undefined)
+          .map((ticket: any, index: number) => (
+            <div key={index} className="border p-4 rounded-lg">
+              {stallType === 'multiple' && (
+                <>
+                  <div className="mb-2 block mt-3">
+                    <Label htmlFor={`ticketName-${index}`} value="Stall Name" />
+                  </div>
+                  <TextInput
+                    id={`ticketName-${index}`}
+                    type="text"
+                    name="ticketName"
+                    value={ticket.ticketName}
+                    onChange={(e) => handleInputChange(index, 'ticketName', e.target.value)}
+                    placeholder="Enter ticket name"
+                  />
+                </>
+              )}
+              {stallType === 'single' && (
+                <input type="hidden" name="ticketName" value={eventData.title} />
+              )}
+
               <div className="mb-2 block mt-3">
-                <Label htmlFor={`ticketPrice-${index}`} value="Ticket Price" />
+                <Label htmlFor={`ticketPrice-${index}`} value="Stall Rent Amount" />
               </div>
               <TextInput
                 id={`ticketPrice-${index}`}
@@ -99,10 +85,10 @@ const Pricing = ({ eventData, setEventData }: any) => {
                 name="ticketPrice"
                 value={ticket.ticketPrice}
                 onChange={(e) => handleInputChange(index, 'ticketPrice', e.target.value)}
-                placeholder="Enter ticket price"
+                placeholder="Enter stall rent price"
               />
               <div className="mb-2 block mt-3">
-                <Label htmlFor={`ticketPrice-${index}`} value="Ticket Quantity" />
+                <Label htmlFor={`quantity-${index}`} value="Stalls Available" />
               </div>
               <TextInput
                 id={`quantity-${index}`}
@@ -110,17 +96,41 @@ const Pricing = ({ eventData, setEventData }: any) => {
                 name="quantity"
                 value={ticket.quantity}
                 onChange={(e) => handleInputChange(index, 'quantity', e.target.value)}
-                placeholder="Enter ticket price"
+                placeholder="Enter stall quantity"
               />
-              <Button color="red" className="mt-3" onClick={() => removeTicket(index)}>
-                Remove Ticket
-              </Button>
+              <div className="mb-2 block mt-3">
+                <Label htmlFor={`area-${index}`} value="Stalls Area(sqft)" />
+              </div>
+              <TextInput
+                id={`area-${index}`}
+                type="number"
+                name="area"
+                value={ticket.area}
+                onChange={(e) => handleInputChange(index, 'area', e.target.value)}
+                placeholder="Enter stall area"
+              />
+              {stallType === 'multiple' && (
+                <Button
+                  color="red"
+                  className="mt-3"
+                  onClick={() => {
+                    setEventData({
+                      ...eventData,
+                      tickets: eventData.tickets.filter((_: any, i: any) => i !== index),
+                    });
+                  }}
+                >
+                  Remove
+                </Button>
+              )}
             </div>
           ))}
-          <Button color="primary" className="mt-3" onClick={addTicket}>
-            Add Ticket
-          </Button>
-        </>
+      </div>
+
+      {stallType === 'multiple' && (
+        <Button color="primary" className="mt-3 w-44" onClick={addTicket}>
+          Add More
+        </Button>
       )}
     </CardBox>
   );
