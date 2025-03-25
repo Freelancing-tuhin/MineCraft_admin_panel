@@ -58,7 +58,7 @@ const GeneralDetail: React.FC<GeneralDetailProps> = ({
         </small>
       </div>
 
-      <div className="mb-2 block">
+      <div className="mb-2 mt-4 block">
         <Label htmlFor="locationDescription" value="Location Description" />
       </div>
       <TextInput

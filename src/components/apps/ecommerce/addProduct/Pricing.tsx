@@ -21,7 +21,10 @@ const Pricing = ({ eventData, setEventData }: any) => {
   useEffect(() => {
     setEventData({
       ...eventData,
-      tickets: [...eventData.tickets, { ticketName: '', ticketPrice: '', quantity: '', area: '' }],
+      tickets: [
+        ...eventData.tickets,
+        { ticketName: eventData?.title, ticketPrice: '', quantity: 1, area: '' },
+      ],
     });
   }, []);
 
@@ -77,7 +80,7 @@ const Pricing = ({ eventData, setEventData }: any) => {
               )}
 
               <div className="mb-2 block mt-3">
-                <Label htmlFor={`ticketPrice-${index}`} value="Stall Rent Amount" />
+                <Label htmlFor={`ticketPrice-${index}`} value="Rent Amount" />
               </div>
               <TextInput
                 id={`ticketPrice-${index}`}
@@ -85,9 +88,9 @@ const Pricing = ({ eventData, setEventData }: any) => {
                 name="ticketPrice"
                 value={ticket.ticketPrice}
                 onChange={(e) => handleInputChange(index, 'ticketPrice', e.target.value)}
-                placeholder="Enter stall rent price"
+                placeholder="Enter rent price"
               />
-              <div className="mb-2 block mt-3">
+              {/* <div className="mb-2 block mt-3">
                 <Label htmlFor={`quantity-${index}`} value="Stalls Available" />
               </div>
               <TextInput
@@ -97,7 +100,7 @@ const Pricing = ({ eventData, setEventData }: any) => {
                 value={ticket.quantity}
                 onChange={(e) => handleInputChange(index, 'quantity', e.target.value)}
                 placeholder="Enter stall quantity"
-              />
+              /> */}
               <div className="mb-2 block mt-3">
                 <Label htmlFor={`area-${index}`} value="Stalls Area(sqft)" />
               </div>

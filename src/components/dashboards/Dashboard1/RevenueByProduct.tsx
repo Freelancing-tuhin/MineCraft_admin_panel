@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import CardBox from '../../shared/CardBox';
-import { Badge, Table } from 'flowbite-react';
+import { Badge, Button, Select, Table } from 'flowbite-react';
 import { Icon } from '@iconify/react';
 import React from 'react';
 import SimpleBar from 'simplebar-react';
@@ -56,11 +56,11 @@ const RevenueByProduct = ({ usersList }: any) => {
           <Table>
             <Table.Head className="border-b border-bordergray dark:border-darkborder">
               <Table.HeadCell className="py-2 px-3 ps-0 text-ld font-normal">Name</Table.HeadCell>
-              <Table.HeadCell className="text-ld font-normal">Age</Table.HeadCell>
               <Table.HeadCell className="text-ld font-normal">Email</Table.HeadCell>
               <Table.HeadCell className="text-ld font-normal">Gender</Table.HeadCell>
-              <Table.HeadCell className="text-ld font-normal">Address</Table.HeadCell>
               <Table.HeadCell className="text-ld font-normal">Amount Paid</Table.HeadCell>
+              <Table.HeadCell className="text-ld font-normal">Booking Status</Table.HeadCell>
+              <Table.HeadCell className="text-ld font-normal">Action</Table.HeadCell>
             </Table.Head>
             <Table.Body className="divide-y divide-bordergray dark:divide-darkborder">
               {usersList &&
@@ -75,9 +75,7 @@ const RevenueByProduct = ({ usersList }: any) => {
                       <Table.Cell className="whitespace-nowrap ps-0">
                         <p className="text-sm">{user.userDetails.full_name}</p>
                       </Table.Cell>
-                      <Table.Cell className="whitespace-nowrap">
-                        <p className="text-sm">{user.userDetails.age}</p>
-                      </Table.Cell>
+
                       <Table.Cell className="whitespace-nowrap">
                         <p className="text-sm">{user.userDetails.email}</p>
                       </Table.Cell>
@@ -88,11 +86,28 @@ const RevenueByProduct = ({ usersList }: any) => {
                           {user.userDetails.gender}
                         </Badge>
                       </Table.Cell>
-                      <Table.Cell className="whitespace-nowrap">
-                        <p className="text-sm">{user.userDetails.address}</p>
-                      </Table.Cell>
+
                       <Table.Cell className="whitespace-nowrap">
                         <p className="text-ld">₹{user.amountPaid}</p>
+                      </Table.Cell>
+                      <Table.Cell className="whitespace-nowrap flex gap-2">
+                        <Select
+                          // value={status}
+                          // onChange={(e) => onChange(e.target.value)}
+                          className="w-40 text-sm"
+                        >
+                          <option value="Pending">Pending</option>
+                          <option value="Success">Success</option>
+                          <option value="Canceled">Canceled</option>
+                        </Select>
+                      </Table.Cell>
+                      <Table.Cell className="whitespace-nowrap">
+                        <Button
+                          size="xs"
+                          // onClick={() => handleSendMail(user?.userId?.email)}
+                        >
+                          Contact
+                        </Button>
                       </Table.Cell>
                     </Table.Row>
                   ))}

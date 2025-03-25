@@ -69,8 +69,9 @@ const AdditionalDetails: React.FC<AdditionalDetailsProps> = ({
           name="eventRules"
           type="text"
           value={eventRules}
+          sizing="lg"
           onChange={handleChange}
-          className="mt-1 w-full"
+          className="form-control mt-1"
           placeholder="Event Rules"
         />
       </div>

@@ -39,7 +39,7 @@ const SalesOverview = () => {
     <>
       <CardBox>
         <div>
-          <h5 className="card-title">Ticket Sales Overview</h5>
+          <h5 className="card-title">Sales Overview</h5>
           <p className="card-subtitle">All time sales</p>
         </div>
         <div className=" relative">

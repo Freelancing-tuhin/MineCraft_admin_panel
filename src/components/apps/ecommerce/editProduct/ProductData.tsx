@@ -1,40 +1,33 @@
-
-import  { useState } from "react";
-import { HiOutlinePlusSm, HiOutlineX } from "react-icons/hi";
-import { Button, Label, TextInput } from "flowbite-react";
-import CardBox from "src/components/shared/CardBox";
+import { useState } from 'react';
+import { HiOutlinePlusSm, HiOutlineX } from 'react-icons/hi';
+import { Button, Label, TextInput } from 'flowbite-react';
+import CardBox from 'src/components/shared/CardBox';
 import React from 'react';
 
 const ProductData = () => {
   const [tags, setTags] = useState<string[]>([]);
-  const [tagInput, setTagInput] = useState<string>("");
+  const [tagInput, setTagInput] = useState<string>('');
 
   const [Cats, setCats] = useState<string[]>([]);
   const [showCatOptions, setShowCatOptions] = useState<boolean>(false);
   const [catOptions] = useState<string[]>([
-    "Computer",
-    "Watches",
-    "Headphone",
-    "Beauty",
-    "Fashion",
-    "Footwear"
+    'Computer',
+    'Watches',
+    'Headphone',
+    'Beauty',
+    'Fashion',
+    'Footwear',
   ]);
 
   const [showTagOptions, setShowTagOptions] = useState<boolean>(false);
-  const [tagOptions] = useState<string[]>([
-    "New",
-    "Trending",
-    "Headphone",
-    "Fashion",
-    "Footwear"
-  ]);
+  const [tagOptions] = useState<string[]>(['New', 'Trending', 'Headphone', 'Fashion', 'Footwear']);
 
   const handleCatInputChange = () => {
     setShowCatOptions(true);
   };
 
   const handleCatInputKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Enter" && Cats.length > 0) {
+    if (e.key === 'Enter' && Cats.length > 0) {
       setCats([]);
       setShowCatOptions(false);
     }
@@ -57,9 +50,9 @@ const ProductData = () => {
   };
 
   const handleTagInputKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Enter" && tagInput) {
+    if (e.key === 'Enter' && tagInput) {
       setTags([...tags, tagInput.trim()]);
-      setTagInput("");
+      setTagInput('');
     }
   };
 
@@ -75,10 +68,9 @@ const ProductData = () => {
     setTags(updatedTags);
   };
 
-
   return (
     <CardBox>
-      <h5 className="card-title mb-4">Product Details</h5>
+      <h5 className="card-title mb-4">Event Details</h5>
       <div className="">
         <div className="mb-2 block">
           <Label htmlFor="cat" value="Categories" />
@@ -127,14 +119,10 @@ const ProductData = () => {
             ))}
           </div>
         </div>
-
       </div>
 
       <div className="mt-2">
-        <Button
-          color={"lightprimary"}
-          className="w-fit flex items-center gap-2 rounded-xl"
-        >
+        <Button color={'lightprimary'} className="w-fit flex items-center gap-2 rounded-xl">
           <HiOutlinePlusSm size={18} /> Add selected category
         </Button>
       </div>
@@ -185,7 +173,6 @@ const ProductData = () => {
             ))}
           </div>
         </div>
-
       </div>
     </CardBox>
   );

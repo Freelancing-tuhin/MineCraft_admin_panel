@@ -54,23 +54,27 @@ const EventTable = ({ events, totalPages, getEvents, searchText }: any) => {
 
           <Table.Body className="divide-y divide-border dark:divide-darkborder">
             {events.map((item: any) => (
-              <Table.Row key={item._id}>
+              <Table.Row key={item?._id}>
                 <Table.Cell>
                   <div className="flex gap-3 items-center">
-                    <img
+                    {/* <img
                       src={item?.banner_Image}
                       alt="Event Banner"
                       className="h-14 w-14 rounded"
-                    />
+                    /> */}
                     <div>
                       <h6 className="text-base overflow-hidden whitespace-nowrap text-ellipsis max-w-[20ch]">
-                        {item.title}
+                        {item?.title}
                       </h6>
-                      <p className="text-sm text-darklink dark:text-bodytext">{item.category}</p>
+                      <p className="text-sm text-darklink dark:text-bodytext">{item?.category}</p>
                     </div>
                   </div>
                 </Table.Cell>
-                <Table.Cell>{format(new Date(item.startDate), 'E, MMM d yyyy')}</Table.Cell>
+                <Table.Cell>
+                  {item?.startDate && (
+                    <>{format(new Date(item?.startDate), 'E, MMM d yyyy') || 'Null'} </>
+                  )}
+                </Table.Cell>
                 <Table.Cell>
                   {formatTime(item?.startTime)} - {formatTime(item?.endTime)}
                 </Table.Cell>
