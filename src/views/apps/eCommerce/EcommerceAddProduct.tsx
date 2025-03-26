@@ -12,6 +12,8 @@ import { useNavigate } from 'react-router';
 import { AuthContext } from 'src/context/authContext/AuthContext';
 import LockScreen from 'src/views/authentication/lockScreen/LockScreen';
 import AdditionalDetails from 'src/components/apps/ecommerce/addProduct/AdditionalDetails';
+import AddFoodPrint from 'src/components/apps/ecommerce/addProduct/AddFoodPrint';
+import AddOtherImages from 'src/components/apps/ecommerce/editProduct/addOtherImages';
 
 const BCrumb = [
   {
@@ -19,43 +21,62 @@ const BCrumb = [
     title: 'Home',
   },
   {
-    title: 'Add Event',
+    title: 'Add Space',
   },
 ];
 
 const AddProduct = () => {
   const { user }: any = useContext(AuthContext);
   const [eventData, setEventData] = useState({
-    title: '',
+    space_name: '',
+    space_description: '',
     category: '',
+    booking_requirement: '',
+    amenities: '',
+    home_truths: '',
+    opening_hours: {
+      weekdays: '',
+      weekend: '',
+      off: '',
+    },
+    space_rules: '',
     type: '',
     startDate: '',
-    startTime: '',
-    endTime: '',
+    endDate: '',
+    area: '',
     location: {
       address: '',
       latitude: 0,
       longitude: 0,
     },
-    description: '',
-    // ticketName: '',
-    // ticketPrice: 0,
+    location_description: '',
+    banner_Image: null,
+    other_images: [],
+    floor_print_image: null,
     tickets: [],
     organizerId: user?._id,
-    amenities: '',
-    locationDescription: '',
-    eventRules: '',
   });
-  const navigate = useNavigate();
+
   const [banner, setBanner] = useState<string | null>(null);
   const [bannerFile, setBannerFile] = useState<File | null>(null);
+  const [otherImages, setOtherImages] = useState<File[]>([]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setEventData({ ...eventData, [e.target.name]: e.target.value });
   };
 
   const handleBannerChange = (file: File) => {
-    setBannerFile(file); // Store actual file
+    setBannerFile(file);
+  };
+
+  const handleOtherImagesChange = (files: File[]) => {
+    setOtherImages((prevImages) => [...prevImages, ...files]);
+  };
+
+  const [floorPrintImage, setFloorPrintImage] = useState<File | null>(null);
+
+  const handleFloorPrintChange = (file: File) => {
+    setFloorPrintImage(file);
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -69,6 +90,8 @@ const AddProduct = () => {
     const eventPayload: CreateEventPayload = {
       ...eventData,
       bannerImage: bannerFile,
+      otherImages: otherImages,
+      floorPrintImage: floorPrintImage,
     };
 
     console.log('Submitting event:', eventPayload);
@@ -79,19 +102,23 @@ const AddProduct = () => {
   return (
     <>
       <LockScreen />
-      <BreadcrumbComp title="Add Event" items={BCrumb} />
+      <BreadcrumbComp title="Add Space" items={BCrumb} />
       <div className="grid grid-cols-12 gap-[30px]">
         <div className="lg:col-span-8 col-span-12">
           <div className="flex flex-col gap-[30px]">
             {/* General */}
             <GeneralDetail
-              title={eventData.title}
-              description={eventData.description}
+              title={eventData.space_name}
+              description={eventData.space_description}
               handleChange={handleChange}
-              locationDescription={eventData.locationDescription}
+              booking_requirement={eventData.booking_requirement}
             />
             <Variation eventData={eventData} setEventData={setEventData} />
             <Pricing eventData={eventData} setEventData={setEventData} />
+            <div className="flex gap-5">
+              <AddFoodPrint onFloorPrintChange={handleFloorPrintChange} />
+              <AddOtherImages onOtherImagesChange={handleOtherImagesChange} />
+            </div>
           </div>
         </div>
         <div className="lg:col-span-4 col-span-12">
@@ -101,7 +128,8 @@ const AddProduct = () => {
             <ProductData eventData={eventData} setEventData={setEventData} />
             <AdditionalDetails
               amenities={eventData.amenities}
-              eventRules={eventData.eventRules}
+              eventRules={eventData.space_rules}
+              home_truths={eventData.home_truths}
               handleChange={handleChange}
               handleAmenitiesChange={(selectedAmenities) =>
                 setEventData((prevData) => ({

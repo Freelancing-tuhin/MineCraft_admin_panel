@@ -15,7 +15,7 @@ const Thumbnail = ({ onBannerChange, setBanner, banner }: any) => {
   return (
     <div>
       <CardBox>
-        <h5 className="card-title mb-4 m">Event Banner</h5>
+        <h5 className="card-title mb-4 m">Thumbnail Image</h5>
         <div className="flex w-full items-center justify-center">
           <Label
             htmlFor="banner-file"
@@ -40,18 +40,17 @@ const Thumbnail = ({ onBannerChange, setBanner, banner }: any) => {
             />
           </Label>
         </div>
-        {banner && (
-          <img
-            src={banner}
-            alt="Banner Preview"
-            className="mt-3 h-48 w-full object-cover rounded-lg"
-          />
-        )}
-
         <small className="text-xs text-darklink dark:text-bodytext text-center">
           Set the product thumbnail and banner image. Only *.png, *.jpg, and *.jpeg image files are
           accepted.
         </small>
+        {banner && (
+          <img
+            src={banner}
+            alt="Banner Preview"
+            className="mt-3 h-48 w-full object-cover rounded-lg border"
+          />
+        )}
       </CardBox>
     </div>
   );

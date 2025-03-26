@@ -4,34 +4,35 @@ import CardBox from 'src/components/shared/CardBox';
 interface GeneralDetailProps {
   title: string;
   description: string;
-  locationDescription: string;
+  booking_requirement: string;
   handleChange: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
 }
 
 const GeneralDetail: React.FC<GeneralDetailProps> = ({
   title,
   description,
-  locationDescription,
   handleChange,
+  booking_requirement,
 }) => {
   return (
     <CardBox>
-      <h5 className="card-title mb-4">General</h5>
+      <h5 className="card-title mb-4">General Details</h5>
+
       {/* Title Input */}
       <div className="mb-4">
         <div className="mb-2 block">
-          <Label htmlFor="prednm" value="Event Name" />
+          <Label htmlFor="prednm" value="Space Name" />
           <span className="text-error ms-1">*</span>
         </div>
         <TextInput
           id="prednm"
-          name="title"
+          name="space_name"
           type="text"
           value={title}
           onChange={handleChange}
           sizing="md"
           className="form-control"
-          placeholder="Event Name"
+          placeholder="Space Name"
         />
         <small className="text-xs text-darklink dark:text-bodytext">
           An event name is required and recommended to be unique.
@@ -44,32 +45,37 @@ const GeneralDetail: React.FC<GeneralDetailProps> = ({
           <Label htmlFor="desc" value="Description" />
         </div>
         <TextInput
-          id="prednm"
-          name="description"
+          id="desc"
+          name="space_description"
           type="text"
           value={description}
           onChange={handleChange}
           sizing="lg"
           className="form-control"
-          placeholder="Event Details"
+          placeholder="Space Details"
         />
         <small className="text-xs text-darklink dark:text-bodytext">
           Set a description for better visibility.
         </small>
       </div>
-
-      <div className="mb-2 mt-4 block">
-        <Label htmlFor="locationDescription" value="Location Description" />
+      <div>
+        <div className="mb-2 block">
+          <Label htmlFor="booking_requirement" value="booking_requirement" />
+        </div>
+        <TextInput
+          id="booking_requirement"
+          name="booking_requirement"
+          type="text"
+          value={booking_requirement}
+          onChange={handleChange}
+          sizing="lg"
+          className="form-control"
+          placeholder="Any special requirement like 30 days before booking"
+        />
+        <small className="text-xs text-darklink dark:text-bodytext">
+          Set a description for better visibility.
+        </small>
       </div>
-      <TextInput
-        id="locationDescription"
-        name="locationDescription"
-        type="text"
-        value={locationDescription}
-        onChange={handleChange}
-        className="form-control"
-        placeholder="Location Details"
-      />
     </CardBox>
   );
 };

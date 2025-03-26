@@ -4,6 +4,7 @@ import CardBox from 'src/components/shared/CardBox';
 interface AdditionalDetailsProps {
   amenities: string;
   eventRules: string;
+  home_truths: string;
   handleChange: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
   handleAmenitiesChange: (selectedOptions: string[]) => void;
 }
@@ -22,6 +23,7 @@ const AdditionalDetails: React.FC<AdditionalDetailsProps> = ({
   eventRules,
   handleChange,
   handleAmenitiesChange,
+  home_truths,
 }) => {
   const selectedAmenities = amenities ? amenities.split(', ') : [];
 
@@ -66,9 +68,27 @@ const AdditionalDetails: React.FC<AdditionalDetailsProps> = ({
         </Label>
         <TextInput
           id="eventRules"
-          name="eventRules"
+          name="space_rules"
           type="text"
           value={eventRules}
+          sizing="lg"
+          onChange={handleChange}
+          className="form-control mt-1"
+          placeholder="Event Rules"
+        />
+      </div>
+      <div className="mb-4">
+        <Label
+          htmlFor="home_truths"
+          className="block text-sm font-medium text-gray-900 dark:text-white"
+        >
+          Home Truths
+        </Label>
+        <TextInput
+          id="home_truths"
+          name="home_truths"
+          type="text"
+          value={home_truths}
           sizing="lg"
           onChange={handleChange}
           className="form-control mt-1"
